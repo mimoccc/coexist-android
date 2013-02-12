@@ -1,0 +1,18 @@
+<resources>
+
+<!--     <string name="api_baseurl">http://domain.com/api/</string> -->
+<!--     <string name="app_name">MY application name</string> -->
+    <string name="loading_string">Requesting items</string>
+    <string name="service_sync">Service for syncing the database</string>
+    <string name="service_schema">Service for updating the schema</string>
+    <string name="service_create">Create a new row on the server database.</string>
+    <string name="service_crud">Fetch various CRUD info related to UI-DB mapping.</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_sync">Sync now</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_resync">Resync</string><string name="action_finishedsync">com.externc.coexist.FINISHED_SYNC</string>
+    <color name="app_color">#11A800</color>
+    
+    
+
+</resources>

@@ -1,0 +1,58 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.externc.coexist"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="15" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:launchMode="singleTop"
+            android:name="com.externc.coexist.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="@string/action_finishedsync" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+		<activity android:name="com.externc.coexist.ui.FormActivity"/>  
+
+		<service
+            android:name="com.externc.coexist.services.SchemaService"
+            android:description="@string/service_schema"
+            android:permission="android.permission.INTERNET"
+            android:stopWithTask="false" >
+        </service>
+        
+        <service
+            android:name="com.externc.coexist.services.SyncService"
+            android:description="@string/service_sync"
+            android:permission="android.permission.INTERNET"
+            android:stopWithTask="false" >
+        </service>
+        
+        <service
+            android:name="com.externc.coexist.services.CrudService"
+            android:description="@string/service_crud"
+            android:permission="android.permission.INTERNET"
+            android:stopWithTask="false" >
+        </service>
+        
+        <service
+            android:name="com.externc.coexist.services.CreateService"
+            android:description="@string/service_create"
+            android:permission="android.permission.INTERNET"
+            android:stopWithTask="false" >
+        </service>
+    </application>
+
+</manifest>

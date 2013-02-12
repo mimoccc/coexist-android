@@ -1,0 +1,72 @@
+#!/bin/bash
+
+## Print the usage out. Used in errors.
+usage(){
+cat << EOF
+usage: $0 options
+
+OPTIONS
+  -i  Path to the icon of this application
+  -I  Path to the notification icon of this application
+  -n  New name of this application
+  -p  Name of the fully qualified java domain style package name
+  -h  The url of the server api; http://domain.com:80/api
+  
+EOF
+}
+
+## Make sure the name and image path were supplied
+validate(){
+if [[ -z $IMAGE ]] || [[ -z $NAME ]] || [[ -z $NIMAGE ]] || [[ -z $API ]] || [[ -z $PACKAGE ]]
+then
+  usage
+  exit 1
+fi
+}
+
+PACKAGE=
+API=
+NIMAGE=
+IMAGE=
+NAME=
+while getopts "i:n:I:h:p:" OPTION
+do
+  case $OPTION in
+    i) IMAGE=$OPTARG;;
+    n) NAME=$OPTARG;;
+    I) NIMAGE=$OPTARG;;
+    h) API=$OPTARG;;
+    p) PACKAGE=$OPTARG;;
+
+    \?) exit 1;;
+  esac
+done
+validate
+
+
+## Actually do stuff
+mogrify -write res/drawable-hdpi/logo.png -resize 72x72 $IMAGE
+mogrify -write res/drawable-ldpi/logo.png -resize 36x36 $IMAGE
+mogrify -write res/drawable-mdpi/logo.png -resize 48x48 $IMAGE
+
+mogrify -write res/drawable-hdpi/notification.png -resize 72x72 $NIMAGE
+mogrify -write res/drawable-ldpi/notification.png -resize 36x36 $NIMAGE
+mogrify -write res/drawable-mdpi/notification.png -resize 48x48 $NIMAGE
+
+echo "
+<resources>
+  <string name=\"api_baseurl\">$API</string>
+  <string name=\"app_name\">$NAME</string>
+</resources>
+" > res/values/custom.xml
+
+./chpackage.sh -p $PACKAGE
+
+
+android update project   \
+    --path . \
+    --name $NAME  \
+    --target 10  \
+    --library ../library
+
+cd library && android update lib-project -p .
