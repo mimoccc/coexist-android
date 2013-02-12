@@ -5,4 +5,5 @@ bin/
 build.xml
 local.properties
 ant.properties
+res/values/custom.xml
 
