@@ -24,6 +24,7 @@ then
 fi
 }
 
+LIB_DIR=library
 PACKAGE=
 API=
 NIMAGE=
@@ -62,11 +63,13 @@ echo "
 
 ./chpackage.sh -p $PACKAGE
 
-
+echo "Updating Android project"
 android update project   \
     --path . \
     --name $NAME  \
     --target 10  \
-    --library ../library
+    --library $LIB_DIR
 
-cd library && android update lib-project -p .
+echo "Updating SerlockActionbar"
+cd $LIB_DIR 
+android update lib-project -p .

@@ -2,6 +2,7 @@
 .project
 bin/
 *.class
-*.properties
 build.xml
+local.properties
+ant.properties
 
