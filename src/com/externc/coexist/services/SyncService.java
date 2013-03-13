@@ -14,9 +14,9 @@ import android.support.v4.content.LocalBroadcastManager;
 import com.externc.coexist.Config;
 import com.externc.coexist.Database;
 import com.externc.coexist.DebugLogger;
-import com.externc.coexist.MainActivity;
 import com.externc.coexist.DebugLogger.Level;
 import com.externc.coexist.api.Sync;
+import com.externc.coexist.base.BaseActivity;
 
 public class SyncService extends BaseService{
 
@@ -72,7 +72,7 @@ public class SyncService extends BaseService{
 				sendEndSync(false,"Updated "+sync.numRows()+" rows");
 				
 				
-				LocalBroadcastManager.getInstance(this).sendBroadcastSync(new Intent(MainActivity.getFinishedSyncAction(this)));
+				LocalBroadcastManager.getInstance(this).sendBroadcastSync(new Intent(BaseActivity.getFinishedSyncAction(this)));
 			}
 			
 		} catch (HttpHostConnectException e) {

@@ -39,8 +39,7 @@ public class DateFieldButton extends FieldButton{
 	public void onClick(View v) {
 		DatePickerFragment newFragment = new DatePickerFragment();
 		newFragment.setEditText(getEdit());
-	    newFragment.show(FormActivity.manager, "datePicker");
-//		getEdit().setText(getFieldFill());
+//	    newFragment.show(FormActivity.manager, "datePicker");
 	}
 
 	

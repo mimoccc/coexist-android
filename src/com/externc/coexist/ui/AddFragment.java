@@ -64,42 +64,10 @@ public class AddFragment extends SherlockFragment implements SyncCreator{
 			}
 		}
 		
-		
-		
-		
 		return layout;
 	}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		DebugLogger.log(this, Level.LOW, "Called pause");
-	}
-	
-	@Override
-	public void onResume() {
-		super.onResume();
-		DebugLogger.log(this, Level.LOW, "Called resume");
-	}
-	
-	@Override
-	public void onStop() {
-		super.onStop();
-		DebugLogger.log(this, Level.LOW, "Called stop");
-		
-	}
-	
-	@Override
-	public void onStart() {
-		super.onStart();
-		DebugLogger.log(this, Level.LOW, "Called start");
-	}
-	
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		DebugLogger.log(this, Level.LOW, "Getting destroyed");
-	}
+
 	
 	public Sync getSync() {
 		SyncBuilder sb = new SyncBuilder();

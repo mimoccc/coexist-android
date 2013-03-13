@@ -9,7 +9,6 @@ import com.externc.coexist.DebugLogger.Level;
 
 public class CrudPager extends FragmentStatePagerAdapter {
 
-	BrowseFragment bf;
 	
 	public CrudPager(FragmentManager fm) {
 		super(fm);
@@ -17,10 +16,8 @@ public class CrudPager extends FragmentStatePagerAdapter {
 
 	@Override
 	public Fragment getItem(int index) {
-		if(index == 1){
-			bf = (BrowseFragment)CrudFactory.getFragment(index);
-			return bf;
-		}
+		if(index == 1)
+			return (BrowseFragment)CrudFactory.getFragment(index);
 		return CrudFactory.getFragment(index);
 	}
 
@@ -46,8 +43,6 @@ public class CrudPager extends FragmentStatePagerAdapter {
 		return POSITION_NONE;
 	}
 	
-	public void reset(){
-		bf.reset();
-	}
+
 	
 }

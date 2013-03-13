@@ -13,8 +13,6 @@ public class CrudFactory {
 		switch (index) {
 		case 1:
 			return new BrowseFragment();
-//		case 1:
-//			return new SearchFragment();
 		case 0:
 			return new AddFragment();
 		default:
@@ -27,8 +25,6 @@ public class CrudFactory {
 		switch (index) {
 		case 1:
 			return "Browse";
-//		case 1:
-//			return "Search";
 		case 0:
 			return "Add";
 		default:

@@ -9,10 +9,10 @@ import org.apache.http.client.methods.HttpGet;
 
 import android.app.IntentService;
 
-import com.externc.coexist.BaseHttpClient;
 import com.externc.coexist.Notifications;
 import com.externc.coexist.api.API;
 import com.externc.coexist.api.Serializer;
+import com.externc.coexist.base.BaseHttpClient;
 
 public abstract class BaseService extends IntentService{
 
