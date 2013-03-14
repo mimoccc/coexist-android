@@ -21,6 +21,7 @@ public class FormActivity extends BaseActivity{
 
 	private ViewPager pager;
 	private FragmentStatePagerAdapter adapter;
+	
 	private Form form;
 	private SyncCreator creator;
 

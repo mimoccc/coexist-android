@@ -19,21 +19,21 @@ public class BrowseAdapter extends BaseAdapter {
 	private Cursor cursor;
 	private Context context;
 	
+	private final int disabledRows = 2;
 	
-	
-	public BrowseAdapter(Context context, Form form) {
+	public BrowseAdapter(Context context, Form form, Database db) {
 		DebugLogger.log(this, Level.LOW, "Created with context: "+context);
 		this.context = context;
 		this.form = form;
-		this.cursor = new Database(context).getTableRows(form);
+		this.cursor = db.getTableRows(form);
 	}
 
 	public int getCount() {
-		return cursor.getCount()+2;
+		return cursor.getCount()+disabledRows;
 	}
 
 	public Cursor getCursor(int position){
-		this.cursor.moveToPosition(position-2);
+		this.cursor.moveToPosition(position-disabledRows);
 		return this.cursor;
 	}
 	
@@ -76,11 +76,10 @@ public class BrowseAdapter extends BaseAdapter {
 		}
 	}
 
+	
 	@Override
 	public boolean isEnabled(int position) {
-		if(position == 0)
-			return false;
-		return true;
+		return position >= disabledRows;
 	}
 	
 }

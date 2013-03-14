@@ -7,6 +7,9 @@ import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.externc.coexist.DebugLogger;
@@ -68,5 +71,18 @@ public abstract class BaseFragment extends SherlockFragment {
 		super.onStop();
 		DebugLogger.log(this, Level.LOW, "Called stop");
 		LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(receiver);
+	}
+
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		DebugLogger.log(this, Level.LOW, "Called start");
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		DebugLogger.log(this, Level.LOW, "Called destroy");
 	}
 }

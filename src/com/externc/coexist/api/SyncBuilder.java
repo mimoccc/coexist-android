@@ -2,7 +2,7 @@ package com.externc.coexist.api;
 
 import java.util.List;
 
-import com.externc.coexist.ui.FieldSection;
+import com.externc.coexist.ui.fields.FieldSection;
 
 public class SyncBuilder {
 

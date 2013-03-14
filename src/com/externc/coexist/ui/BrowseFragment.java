@@ -1,22 +1,16 @@
 package com.externc.coexist.ui;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
-import com.actionbarsherlock.app.SherlockListFragment;
-import com.externc.coexist.DebugLogger;
-import com.externc.coexist.DebugLogger.Level;
+import com.externc.coexist.Database;
 import com.externc.coexist.api.Form;
-import com.externc.coexist.base.BaseActivity;
 import com.externc.coexist.base.BaseListFragment;
 
 public class BrowseFragment extends BaseListFragment {
 
 	private Form form;
-	
+	private Database db;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -25,14 +19,14 @@ public class BrowseFragment extends BaseListFragment {
 		if(form == null){
 			throw new IllegalStateException("The activity should have been given an intent with a Form in it.");
 		}
+		db = Database.getDatabase(getActivity());
 	}
 	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setListAdapter(new BrowseAdapter(getActivity(), form));
-		
+		refresh();
 	}
 	
 
@@ -43,8 +37,15 @@ public class BrowseFragment extends BaseListFragment {
 		getListView().setHeaderDividersEnabled(true);
 	}
 	
+	@Override
 	public void refresh(){
-		setListAdapter(new BrowseAdapter(getActivity(), form));
+		setListAdapter(new BrowseAdapter(getActivity(), form, db));
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		db.close();
 	}
 	
 }

@@ -71,5 +71,18 @@ public abstract class BaseListFragment extends SherlockListFragment {
 		DebugLogger.log(this, Level.LOW, "Called stop");
 		LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(receiver);
 	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		DebugLogger.log(this, Level.LOW, "Called start");
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		DebugLogger.log(this, Level.LOW, "Called destroy");
+	}
+
 
 }

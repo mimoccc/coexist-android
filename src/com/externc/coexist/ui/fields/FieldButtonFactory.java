@@ -1,4 +1,4 @@
-package com.externc.coexist.ui;
+package com.externc.coexist.ui.fields;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +16,13 @@ public class FieldButtonFactory {
 	}
 	
 	
-	public static List<FieldButton> getFieldButtons(Context context, EditText edit, String type){
+	public static List<FieldButton> getFieldButtons(EditText edit, String type){
 		DebugLogger.log(FieldButtonFactory.class, Level.LOW, "Getting field buttons for type "+type);
 		
 		List<FieldButton>list = new ArrayList<FieldButton>();
 		
 		if(type.equals("date")){
-			list.add(new DateFieldButton(context, edit));
+			list.add(new DateFieldButton(edit));
 		}
 		
 		return list;

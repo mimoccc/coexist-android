@@ -48,7 +48,7 @@ public class SchemaService extends BaseService {
 	 */
 	private void createDatabase(Schema schema){
 		DebugLogger.log(this,Level.LOW,"Creating the database.");
-		Database db = new Database(this);
+		Database db = Database.getDatabase(this);
 		db.create(schema);
 	}
 

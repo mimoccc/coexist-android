@@ -46,7 +46,7 @@ public class SyncService extends BaseService{
 		sendStartSync(message);
 		
 		Config conf = new Config(this);
-		Database db = new Database(this);
+		Database db = Database.getDatabase(this);
 		List<String> tables = db.getTables();
 		
 		addParameter("version", conf.getVersion());
