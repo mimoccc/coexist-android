@@ -7,16 +7,23 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.externc.coexist.Database;
+import com.externc.coexist.Database.JointCursor;
 import com.externc.coexist.DebugLogger;
 import com.externc.coexist.DebugLogger.Level;
 import com.externc.coexist.api.Form;
 import com.externc.coexist.api.Row;
 import com.externc.coexist.ui.components.BrowseRow;
 
+/**
+ * This is the adapter that is used in the BrowseFragment for
+ * displaying the contents of a single table / form.
+ * @author Anthony Naddeo
+ *
+ */
 public class BrowseAdapter extends BaseAdapter {
 
 	private Form form;
-	private Cursor cursor;
+	private JointCursor cursor;
 	private Context context;
 	
 	private final int disabledRows = 2;
@@ -29,12 +36,12 @@ public class BrowseAdapter extends BaseAdapter {
 	}
 
 	public int getCount() {
-		return cursor.getCount()+disabledRows;
+		return cursor.cursor().getCount()+disabledRows;
 	}
 
 	public Cursor getCursor(int position){
-		this.cursor.moveToPosition(position-disabledRows);
-		return this.cursor;
+		this.cursor.cursor().moveToPosition(position-disabledRows);
+		return this.cursor.cursor();
 	}
 	
 	public Object getItem(int position) {
@@ -47,6 +54,10 @@ public class BrowseAdapter extends BaseAdapter {
 		return position;
 	}
 
+	/**
+	 * Right now, item 0 is the column names, 1 is a small separator and
+	 * the rest are data.
+	 */
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (position == 0) {
 			if(convertView == null)
@@ -80,6 +91,14 @@ public class BrowseAdapter extends BaseAdapter {
 	@Override
 	public boolean isEnabled(int position) {
 		return position >= disabledRows;
+	}
+	
+	/**
+	 * Close the cursor and database connection. This is called by the 
+	 * parent fragment when it's onDestroy() is called.
+	 */
+	public void close(){
+		this.cursor.close();
 	}
 	
 }

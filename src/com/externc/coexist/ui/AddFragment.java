@@ -97,7 +97,6 @@ public class AddFragment extends BaseFragment implements SyncCreator, FormLogger
 		
 		Database db = Database.getDatabase(getActivity());
 		db.setRecentValues(form.getTable(), values);
-		db.close();
 	}
 
 	

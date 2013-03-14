@@ -10,7 +10,6 @@ import com.externc.coexist.base.BaseListFragment;
 public class BrowseFragment extends BaseListFragment {
 
 	private Form form;
-	private Database db;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -19,7 +18,6 @@ public class BrowseFragment extends BaseListFragment {
 		if(form == null){
 			throw new IllegalStateException("The activity should have been given an intent with a Form in it.");
 		}
-		db = Database.getDatabase(getActivity());
 	}
 	
 	
@@ -39,13 +37,13 @@ public class BrowseFragment extends BaseListFragment {
 	
 	@Override
 	public void refresh(){
-		setListAdapter(new BrowseAdapter(getActivity(), form, db));
+		setListAdapter(new BrowseAdapter(getActivity(), form, Database.getDatabase(getActivity())));
 	}
 	
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		db.close();
+		((BrowseAdapter)getListAdapter()).close();
 	}
 	
 }
