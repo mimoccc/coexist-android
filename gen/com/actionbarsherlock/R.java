@@ -978,21 +978,22 @@ containing a value of this type.
         public static final int field_entry=0x7f040034;
         public static final int field_label=0x7f040033;
         public static final int form_layout=0x7f040036;
-        public static final int frame=0x7f04003c;
+        public static final int frame=0x7f04003d;
         public static final int homeAsUp=0x7f040006;
         public static final int listMode=0x7f040002;
-        public static final int menu_create=0x7f040040;
-        public static final int menu_resync=0x7f040043;
-        public static final int menu_settings=0x7f040041;
-        public static final int menu_sync=0x7f040042;
+        public static final int list_view_list=0x7f04003c;
+        public static final int menu_create=0x7f040041;
+        public static final int menu_resync=0x7f040044;
+        public static final int menu_settings=0x7f040042;
+        public static final int menu_sync=0x7f040043;
         public static final int normal=0x7f040001;
-        public static final int pager=0x7f04003d;
-        public static final int pager_title_strip=0x7f04003e;
+        public static final int pager=0x7f04003e;
+        public static final int pager_title_strip=0x7f04003f;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
         public static final int tabMode=0x7f040003;
-        public static final int table=0x7f04003f;
+        public static final int table=0x7f040040;
         public static final int useLogo=0x7f040004;
         public static final int wrap_content=0x7f040000;
     }
@@ -1028,12 +1029,13 @@ containing a value of this type.
         public static final int field_button=0x7f030019;
         public static final int form=0x7f03001a;
         public static final int fragment_categories=0x7f03001b;
-        public static final int frame=0x7f03001c;
-        public static final int pager=0x7f03001d;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001e;
-        public static final int sherlock_spinner_item=0x7f03001f;
-        public static final int table=0x7f030020;
-        public static final int text=0x7f030021;
+        public static final int fragment_list_view=0x7f03001c;
+        public static final int frame=0x7f03001d;
+        public static final int pager=0x7f03001e;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001f;
+        public static final int sherlock_spinner_item=0x7f030020;
+        public static final int table=0x7f030021;
+        public static final int text=0x7f030022;
     }
     public static final class menu {
         public static final int activity_form=0x7f0b0000;

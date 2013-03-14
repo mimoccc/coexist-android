@@ -8,8 +8,9 @@ public class Reference implements Parcelable{
 	private String table;
 	private String column;
 	
-	public Reference() {
-		// TODO Auto-generated constructor stub
+	protected Reference(String table, String column){
+		this.table = table;
+		this.column = column;
 	}
 	
 	public void writeToParcel(Parcel out, int flags) {
@@ -37,7 +38,16 @@ public class Reference implements Parcelable{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public String getTable() {
+		return table;
+	}
+
+	public String getColumn() {
+		return column;
+	}
     
+	
    
 
 }

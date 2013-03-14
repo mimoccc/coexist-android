@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.externc.coexist.DebugLogger;
+import com.externc.coexist.DebugLogger.Level;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -62,11 +65,17 @@ public class Form implements Parcelable, Iterable<Field>{
 	}
 
 	public String getFieldsAsSql(){
-		StringBuilder sb = new StringBuilder();
-		sb.append(getFields().get(0).getColumn());
-		for(int i = 1; i < getFields().size(); i++){
-			sb.append(","+getFields().get(i).getColumn());
+		Iterator<Field> iter = fields.iterator();
+		
+		StringBuilder sb = new StringBuilder(iter.next().getColumn());
+		while(iter.hasNext()){
+			Field f = iter.next();
+			DebugLogger.log(this, Level.HIGH, String.format("FIELD: %s, %s, %s",f.getLabel(),f.getColumn(),f.getType()));
+			sb.append(","+f.getColumn());
+			
 		}
+
+		DebugLogger.log(this, Level.LOW, "Create a sql string for "+getLabel()+": "+sb.toString());
 		return sb.toString();
 	}
 	

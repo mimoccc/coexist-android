@@ -3,11 +3,19 @@ package com.externc.coexist.api;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 
 import com.externc.coexist.DebugLogger;
 import com.externc.coexist.DebugLogger.Level;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 public class Serializer {
 	
@@ -19,6 +27,7 @@ public class Serializer {
 	
 	private Gson gson;
 	private Mode mode = Mode.JSON;
+	
 	
 	public Serializer() {
 		DebugLogger.log(this,Level.LOW,"Making a serializer");

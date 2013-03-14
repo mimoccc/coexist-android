@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import android.R.string;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -12,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 
 import com.externc.coexist.DebugLogger.Level;
+import com.externc.coexist.api.Field;
 import com.externc.coexist.api.Form;
 import com.externc.coexist.api.Row;
 import com.externc.coexist.api.Schema;
@@ -320,12 +322,51 @@ public class Database {
 	 */
 	public JointCursor getTableRows(Form form){
 		String table = form.getTable();
-		DebugLogger.log(this, Level.LOW, "Getting rows for "+table);
+		String sql = "SELECT "+form.getFieldsAsSql()+" FROM "+table;
+		DebugLogger.log(this, Level.LOW, "Getting rows for "+sql);
 		SQLiteDatabase db = open();
 		
-		Cursor c = db.rawQuery("SELECT "+form.getFieldsAsSql()+" FROM "+table, null);
+		Cursor c = db.rawQuery(sql, null);
 		JointCursor jc = new JointCursor(c, db);
 		return jc;
+	}
+	
+	
+	/**
+	 * Get all values for a particular field. That field must have
+	 * a value of "reference" for its type attribute, and it must have
+	 * a valid Reference object for its references attribute. This will
+	 * be used on the add form. When a user clicks on a FieldSection that
+	 * encapsulates a reference Field (a foreign key in SQL), then a list
+	 * of options will be presented to them, instead of being allowed to
+	 * type values in.
+	 * @param field A field that is a reference type.
+	 * @return A String list of possible references.
+	 */
+	public List<String> getReferences(Field field){
+		String table = field.getReferences().getTable();
+		String column = field.getReferences().getColumn();
+		
+		DebugLogger.log(this, Level.LOW, "Getting references for "+field);
+		
+		Cursor c = null;
+		SQLiteDatabase db = open();
+		try{
+			c = db.rawQuery(printf("SELECT DISTINCT %s from %s",column,table), null);
+			
+			List<String> values = new ArrayList<String>();
+			while(c.moveToNext())
+				values.add(c.getString(0));
+			
+			return values;
+		}catch(SQLiteException e){
+			DebugLogger.log(this, Level.LOW, e.getMessage());
+			return null;
+		}finally{
+			c.close();
+			db.close();
+		}
+		
 	}
 
 	/**

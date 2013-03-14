@@ -38,4 +38,17 @@ public class DatePickerFragment extends SherlockDialogFragment implements
 		
 		edit.setText(year + "-" +(monthOfYear+1)+"-"+dayOfMonth);
 	}
+	
+	/**
+	 * This is a temporary work around. On orientation changes, the EditText is
+	 * rebuilt, but this Dialog is still showing with the old EditText's reference.
+	 * The way I have it setup, there is no easy way to get the new EditText 
+	 * to this fragment, so I'll dismiss it on orientation change and
+	 * make the user click again...for now.
+	 */
+	@Override
+	public void onPause() {
+		super.onPause();
+		dismiss();
+	}
 }

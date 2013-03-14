@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,6 +98,13 @@ public class AddFragment extends BaseFragment implements SyncCreator, FormLogger
 		
 		Database db = Database.getDatabase(getActivity());
 		db.setRecentValues(form.getTable(), values);
+	}
+
+
+
+	@Override
+	public FragmentManager getManager() {
+		return getActivity().getSupportFragmentManager();
 	}
 
 	

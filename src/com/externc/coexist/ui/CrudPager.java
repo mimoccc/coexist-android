@@ -16,19 +16,31 @@ public class CrudPager extends FragmentStatePagerAdapter {
 
 	@Override
 	public Fragment getItem(int index) {
-		if(index == 1)
-			return (BrowseFragment)CrudFactory.getFragment(index);
-		return CrudFactory.getFragment(index);
+		switch (index) {
+		case 1:
+			return new BrowseFragment();
+		case 0:
+			return new AddFragment();
+		default:
+			return null;
+		}
 	}
 
 	@Override
 	public int getCount() {
-		return CrudFactory.getSize();
+		return 2;
 	}
 	
 	@Override
-	public CharSequence getPageTitle(int position) {
-		return CrudFactory.getTitle(position);
+	public CharSequence getPageTitle(int index) {
+		switch (index) {
+		case 1:
+			return "Browse";
+		case 0:
+			return "Add";
+		default:
+			return null;
+		}
 	}
 
 	@Override

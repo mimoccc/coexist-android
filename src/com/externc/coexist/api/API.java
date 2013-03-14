@@ -82,7 +82,13 @@ public class API{
 			dest.writeInt(0);
 		}else{
 			dest.writeInt(1);
-			dest.writeParcelable(toWrite, flags);
+			toWrite.writeToParcel(dest, flags);
+			/**
+			 * dest.writeParcelable clearly was not meant to be used
+			 * the like toWrite.writeToParcel, it took forever to identify it
+			 * as a discreet bug. I'll leave it here to remind myself of the horrors.
+			 */
+//			dest.writeParcelable(toWrite, flags);
 		}
 	}
 

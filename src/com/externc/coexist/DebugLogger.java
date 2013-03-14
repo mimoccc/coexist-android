@@ -62,6 +62,14 @@ public class DebugLogger {
 		
 	}
 	
+	public static void log(Object caller, Level level, String format, Object ... objects){
+		log(caller, level, String.format(format,objects));
+	}
+	
+	public static void log(Class<? extends Object> c, Level level, String format, Object ... objects){
+		log(c, level, String.format(format,objects));
+	}
+	
 	/**
 	 * Convenience method for passing in objects instead of classes, so
 	 * it can be called using <tt>this</tt>.

@@ -43,6 +43,7 @@ public class CrudService extends BaseService {
 			getAPI().sync(this);
 		}catch(Exception e){
 			DebugLogger.log(this, Level.LOW, "Error: "+ e.toString());
+			e.printStackTrace();
 			sendEndSync(true, "unknown");
 		}
 		

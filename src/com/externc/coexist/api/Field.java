@@ -15,7 +15,13 @@ public class Field implements Parcelable{
 	private boolean required = false;
 	private Reference references;
 	
-
+	protected Field(String label, String type, String column, Boolean required, Reference references){
+		this.label = label;
+		this.type = type;
+		this.column = column == null ? label : column;
+		this.required = required == null ? false : required;
+		this.references = references;
+	}
 	
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(label);
@@ -44,10 +50,7 @@ public class Field implements Parcelable{
 		
 		
 	};
-	
-	public Field() {
 
-	}
 
 
 	public String getLabel() {
