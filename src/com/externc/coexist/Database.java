@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import android.R.string;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;

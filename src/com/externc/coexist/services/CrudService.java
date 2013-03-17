@@ -24,12 +24,19 @@ public class CrudService extends BaseService {
 	}
 
 	@Override
+	protected String getUpdateMessage() {
+		return "Downloading the form data.";
+	}
+
+
+	@Override
 	protected void onHandleIntent(Intent intent) {
 		DebugLogger.log(this, Level.LOW, "Fetch crud from the api.");
-		sendStartSync("Downloading the form data.");
+		sendStartSync();
 		Config config = new Config(this);
 		
 		try{
+			sendServiceProgressBroadcast();
 			HttpResponse response = execute(getUrl());
 			DebugLogger.log(this, Level.LOW, "Sending request to: "+getUrl());
 			CrudResponse crud = getSerializer().decode(response.getEntity().getContent(), CrudResponse.class);
@@ -39,7 +46,7 @@ public class CrudService extends BaseService {
 			Create create = crud.getCreate();
 			config.setCreate(create);
 			
-
+			
 			getAPI().sync(this);
 		}catch(Exception e){
 			DebugLogger.log(this, Level.LOW, "Error: "+ e.toString());
@@ -50,4 +57,5 @@ public class CrudService extends BaseService {
 		
 	}
 
+	
 }

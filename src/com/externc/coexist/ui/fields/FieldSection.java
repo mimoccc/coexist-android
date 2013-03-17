@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -58,7 +57,10 @@ public class FieldSection implements OnFocusChangeListener{
 	
 	private void setInputType(){
 		if(this.field.getType().equals("integer")){
-			this.entry.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
+			this.entry.setInputType(InputType.TYPE_CLASS_NUMBER );
+		
+		}else if(this.field.getType().equals("float")){
+			this.entry.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 		
 		}else if(this.field.getType().equals("date")){
 			this.entry.setInputType(InputType.TYPE_NULL);

@@ -21,13 +21,17 @@ public class CreateService extends BaseService {
 	protected String targetApi() {
 		return "create";
 	}
+	
+	@Override
+	protected String getUpdateMessage() {
+		return "Sending form to server.";
+	}
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		Sync sync = intent.getParcelableExtra("sync");
 		DebugLogger.log(this, Level.LOW, "Got the sync "+sync);
-		
-		sendStartSync("Sending form.");
+		sendStartSync();
 		
 		Config conf = new Config(this);
 		
@@ -38,6 +42,7 @@ public class CreateService extends BaseService {
 		DebugLogger.log(this, Level.LOW, "Generaetd sync url: " + url);
 		
 		try{
+			sendServiceProgressBroadcast();
 			DebugLogger.log(this, Level.LOW, "Starting the request.");
 			HttpResponse response = execute(url);
 			
@@ -55,6 +60,8 @@ public class CreateService extends BaseService {
 		}
 		
 	}
+
+	
 
 }
 

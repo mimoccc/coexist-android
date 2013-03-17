@@ -8,10 +8,13 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 
 import android.app.IntentService;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 
 import com.externc.coexist.Notifications;
 import com.externc.coexist.api.API;
 import com.externc.coexist.api.Serializer;
+import com.externc.coexist.base.BaseActivity;
 import com.externc.coexist.base.BaseHttpClient;
 
 public abstract class BaseService extends IntentService{
@@ -29,6 +32,20 @@ public abstract class BaseService extends IntentService{
 		builder = new RequestBuilder(this);
 		serializer = new Serializer();
 	}
+	
+	protected void sendFinishedSyncBroadcast(boolean success){
+		Intent intent = new Intent(BaseActivity.getFinishedSyncAction(this));
+		intent.putExtra("success", success);
+		LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+	}
+	
+	protected void sendServiceProgressBroadcast(){
+		Intent intent = new Intent(BaseActivity.getServiceProgressAction(this));
+		intent.putExtra("message", getUpdateMessage());
+		LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+	}
+	
+	protected abstract String getUpdateMessage();
 	
 	protected Serializer getSerializer(){
 		return this.serializer;
@@ -48,8 +65,8 @@ public abstract class BaseService extends IntentService{
 		return this.builder.getUrl();
 	}
 	
-	protected void sendStartSync(String message){
-		nm.startSync(message);
+	protected void sendStartSync(){
+		nm.startSync(getUpdateMessage());
 	}
 	
 	protected HttpClient getClient(){

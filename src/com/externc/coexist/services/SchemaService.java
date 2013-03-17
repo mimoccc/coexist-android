@@ -41,6 +41,11 @@ public class SchemaService extends BaseService {
 		return "schema";
 	}
 
+	@Override
+	protected String getUpdateMessage() {
+		return "Downloading the schema information";
+	}
+	
 	/**
 	 * Use the schema response from the server to create the local database.
 	 * @param schema The Schema object that was returned as JSON from the 
@@ -61,11 +66,12 @@ public class SchemaService extends BaseService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		DebugLogger.log(this,Level.LOW,"Executing the schema service");
-		sendStartSync("Downloading the schema information");
+		sendStartSync();
 
 		//TODO add error check for codes from server
 		
 		try {
+			sendServiceProgressBroadcast();
 			addParameter("db", "sqlite");
 			HttpResponse response = execute(getUrl());
 
@@ -78,6 +84,7 @@ public class SchemaService extends BaseService {
 			createDatabase(schema);
 
 			DebugLogger.log(this,Level.LOW,"Finished the schema udpate, starting sync.");
+			
 			getAPI().crud(this);
 
 		} catch (IOException e) {
@@ -89,6 +96,9 @@ public class SchemaService extends BaseService {
 
 		
 	}
+
+
+	
 
 
 	

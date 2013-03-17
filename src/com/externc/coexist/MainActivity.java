@@ -30,8 +30,10 @@ public class MainActivity extends BaseActivity{
         FragmentTransaction t = man.beginTransaction();
         t.add(R.id.frame, new HomeFragment());
         t.commit();
+
     }
 
+    
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

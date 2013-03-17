@@ -9,14 +9,12 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.conn.HttpHostConnectException;
 
 import android.content.Intent;
-import android.support.v4.content.LocalBroadcastManager;
 
 import com.externc.coexist.Config;
 import com.externc.coexist.Database;
 import com.externc.coexist.DebugLogger;
 import com.externc.coexist.DebugLogger.Level;
 import com.externc.coexist.api.Sync;
-import com.externc.coexist.base.BaseActivity;
 
 public class SyncService extends BaseService{
 
@@ -39,11 +37,14 @@ public class SyncService extends BaseService{
 		return "sync";
 	}
 	
+	@Override
+	protected String getUpdateMessage() {
+		return "Syncing the database.";
+	}
 	
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		String message = "Syncing the database.";
-		sendStartSync(message);
+		sendStartSync();
 		
 		Config conf = new Config(this);
 		Database db = Database.getDatabase(this);
@@ -57,6 +58,7 @@ public class SyncService extends BaseService{
 		DebugLogger.log(this, Level.LOW, "Generaetd sync url: " + url);
 		
 		try {
+			sendServiceProgressBroadcast();
 			DebugLogger.log(this, Level.LOW, "Starting the request.");
 			HttpResponse response = execute(url);
 			Sync sync = getSerializer().decode(response.getEntity().getContent(), Sync.class);
@@ -71,24 +73,30 @@ public class SyncService extends BaseService{
 				db.sync(sync);
 				sendEndSync(false,"Updated "+sync.numRows()+" rows");
 				
-				
-				LocalBroadcastManager.getInstance(this).sendBroadcastSync(new Intent(BaseActivity.getFinishedSyncAction(this)));
+				//broadcast that progess has been made.
+				sendFinishedSyncBroadcast(true);
 			}
 			
 		} catch (HttpHostConnectException e) {
+			sendFinishedSyncBroadcast(false);
 			DebugLogger.log(this, Level.LOW, e.getMessage());
 			e.printStackTrace();
 			sendEndSync(true,"Could not connect to the server.");
 		} catch (ClientProtocolException e) {
+			sendFinishedSyncBroadcast(false);
 			e.printStackTrace();
-		}catch (UnknownHostException e){
+		} catch (UnknownHostException e){
+			sendFinishedSyncBroadcast(false);
 			e.printStackTrace();
 			sendEndSync(true, "Could not reach host.");
 		} catch (IOException e) {
+			sendFinishedSyncBroadcast(false);
 			e.printStackTrace();
 		}
 		
 	}
+
+	
 	
 
 

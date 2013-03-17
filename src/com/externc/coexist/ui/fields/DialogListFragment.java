@@ -13,12 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.externc.coexist.Database;
-import com.externc.coexist.DebugLogger;
 import com.externc.coexist.R;
-import com.externc.coexist.DebugLogger.Level;
 import com.externc.coexist.api.Field;
 
 public class DialogListFragment extends DialogFragment implements OnItemClickListener{

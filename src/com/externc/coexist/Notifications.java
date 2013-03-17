@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
 import com.externc.coexist.DebugLogger.Level;
-import com.externc.coexist.R;
 
 /**
  * This class can be used to send notifications to the tray that
