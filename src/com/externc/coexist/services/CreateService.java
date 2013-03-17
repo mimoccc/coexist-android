@@ -53,10 +53,12 @@ public class CreateService extends BaseService {
 				new API().sync(this);
 			}else{
 				sendEndSync(true, r.getMessage());
+				sendFinishedSyncBroadcast(false);
 			}
 			
 		}catch(Exception e){
 			sendEndSync(true, e.getMessage());
+			sendFinishedSyncBroadcast(false);
 		}
 		
 	}

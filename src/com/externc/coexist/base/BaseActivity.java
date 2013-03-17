@@ -87,14 +87,12 @@ public abstract class BaseActivity extends SherlockFragmentActivity {
 	
 	
 	/**
-	 * Every onCreate, Activities will register themselves as broadcast
+	 * Every onResume, Activities will register themselves as broadcast
 	 * receivers.
 	 */
 	@Override
-	protected void onCreate(Bundle bundle) {
-		super.onCreate(bundle);
-		DebugLogger.log(this, Level.LOW, "Called onCreate");
-		
+	protected void onResume() {
+		super.onResume();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(getFinishedSyncAction(this));
 		filter.addAction(getServiceProgressAction(this));
