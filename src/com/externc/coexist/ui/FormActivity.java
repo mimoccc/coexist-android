@@ -37,7 +37,7 @@ public class FormActivity extends BaseActivity{
 		adapter = new CrudPager(getSupportFragmentManager());
 		pager = (ViewPager) findViewById(R.id.pager);
 		pager.setAdapter(adapter);
-		pager.setCurrentItem(1);
+//		pager.setCurrentItem(1);
 	}
 	
 	@Override

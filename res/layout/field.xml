@@ -7,31 +7,27 @@
         android:id="@+id/field_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minEms="7"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="16dp" />
 
+    <LinearLayout
+        android:id="@+id/field_button_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
     <EditText
         android:id="@+id/field_entry"
-        android:inputType="text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/field_label"
-        android:layout_marginRight="113dp"
-        android:ems="10" >
-
+        android:layout_toLeftOf="@id/field_button_layout"
+        android:layout_toRightOf="@+id/field_label"
+        android:ems="10"
+        android:inputType="text" >
     </EditText>
-    
-    <LinearLayout 
-        android:id="@+id/field_button_layout"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/field_entry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        
-        
-    </LinearLayout>
 
 </RelativeLayout>

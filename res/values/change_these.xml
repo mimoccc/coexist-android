@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <string name="api_baseurl">http://bb.externc.com:8970/api/</string>
+    <string name="api_baseurl">http://workoutlog.externc.com/api/</string>
     <string name="app_name">ExerciseLog</string>
     
 </resources>
