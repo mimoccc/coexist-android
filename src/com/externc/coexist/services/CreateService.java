@@ -39,7 +39,7 @@ public class CreateService extends BaseService {
 		addParameter("sync", getSerializer().encode(sync));
 		
 		String url = getUrl();
-		DebugLogger.log(this, Level.LOW, "Generaetd sync url: " + url);
+		DebugLogger.log(this, Level.LOW, "Generaetd create url: " + url);
 		
 		try{
 			sendServiceProgressBroadcast();
