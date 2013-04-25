@@ -3,14 +3,14 @@ package com.externc.coexist.api;
 
 public class CrudResponse extends Response {
 
-	private Create create;
+	private Metamodel create;
 	private int version;
 	
 	private CrudResponse() {
 
 	}
 	
-	public Create getCreate(){
+	public Metamodel getCreate(){
 		return this.create;
 	}
 	

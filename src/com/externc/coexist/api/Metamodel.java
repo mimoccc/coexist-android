@@ -6,11 +6,11 @@ import java.util.List;
 
 
 
-public class Create implements Iterable<Form>, Writable{
+public class Metamodel implements Iterable<Form>, Writable{
 	
 	ArrayList<Form> forms;
 
-	public Create() {
+	public Metamodel() {
 		// TODO Auto-generated constructor stub
 	}
 

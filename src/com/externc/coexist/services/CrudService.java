@@ -8,7 +8,7 @@ import android.content.Intent;
 import com.externc.coexist.Config;
 import com.externc.coexist.DebugLogger;
 import com.externc.coexist.DebugLogger.Level;
-import com.externc.coexist.api.Create;
+import com.externc.coexist.api.Metamodel;
 import com.externc.coexist.api.CrudResponse;
 
 public class CrudService extends BaseService {
@@ -43,7 +43,7 @@ public class CrudService extends BaseService {
 			DebugLogger.log(this, Level.LOW, "Got the response.");
 			
 			
-			Create create = crud.getCreate();
+			Metamodel create = crud.getCreate();
 			config.setCreate(create);
 			
 			

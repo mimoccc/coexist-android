@@ -15,12 +15,12 @@ import android.widget.TextView;
 import com.externc.coexist.Config;
 import com.externc.coexist.DebugLogger;
 import com.externc.coexist.DebugLogger.Level;
-import com.externc.coexist.api.Create;
+import com.externc.coexist.api.Metamodel;
 import com.externc.coexist.api.Form;
 
 public class FormsAdapter extends BaseAdapter implements OnItemClickListener {
 
-	private Create create;
+	private Metamodel create;
 	private Context context;
 	
 	public FormsAdapter(Context context) throws FileNotFoundException, IOException {

@@ -10,7 +10,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.externc.coexist.DebugLogger.Level;
-import com.externc.coexist.api.Create;
+import com.externc.coexist.api.Metamodel;
 import com.externc.coexist.api.Serializer;
 import com.externc.coexist.R;
 
@@ -42,16 +42,16 @@ public class Config{
 		getPrefs().edit().putInt("version", version).commit();
 	}
 	
-	public Create getCreate() throws FileNotFoundException, IOException{
+	public Metamodel getCreate() throws FileNotFoundException, IOException{
 		DebugLogger.log(this, Level.LOW, "Retreiving the Create object from the file system.");
 		FileInputStream fis = getContext().openFileInput(createFile);
 		Serializer s = new Serializer();
-		Create create = s.decode(fis, Create.class);
+		Metamodel create = s.decode(fis, Metamodel.class);
 		
 		return create;
 	}
 	
-	public void setCreate(Create create) throws FileNotFoundException, IOException   {
+	public void setCreate(Metamodel create) throws FileNotFoundException, IOException   {
 		DebugLogger.log(this, Level.LOW, "Saving "+create+" as the new Create.");
 		FileOutputStream fos = getContext().openFileOutput(createFile, Context.MODE_PRIVATE);
 		fos.write(create.getBytes());
