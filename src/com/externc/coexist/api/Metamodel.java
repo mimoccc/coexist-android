@@ -9,6 +9,7 @@ import java.util.List;
 public class Metamodel implements Iterable<Form>, Writable{
 	
 	ArrayList<Form> forms;
+	ArrayList<View> views;
 
 	public Metamodel() {
 		// TODO Auto-generated constructor stub

@@ -1,12 +1,12 @@
 package com.externc.coexist.api;
 
 
-public class CrudResponse extends Response {
+public class MetamodelResponse extends Response {
 
 	private Metamodel create;
 	private int version;
 	
-	private CrudResponse() {
+	private MetamodelResponse() {
 
 	}
 	

@@ -9,11 +9,11 @@ import com.externc.coexist.Config;
 import com.externc.coexist.DebugLogger;
 import com.externc.coexist.DebugLogger.Level;
 import com.externc.coexist.api.Metamodel;
-import com.externc.coexist.api.CrudResponse;
+import com.externc.coexist.api.MetamodelResponse;
 
-public class CrudService extends BaseService {
+public class MetamodelService extends BaseService {
 
-	public CrudService() {
+	public MetamodelService() {
 		super("crud");
 		DebugLogger.log(this, Level.LOW,"Created crud service");
 	}
@@ -39,7 +39,7 @@ public class CrudService extends BaseService {
 			sendServiceProgressBroadcast();
 			HttpResponse response = execute(getUrl());
 			DebugLogger.log(this, Level.LOW, "Sending request to: "+getUrl());
-			CrudResponse crud = getSerializer().decode(response.getEntity().getContent(), CrudResponse.class);
+			MetamodelResponse crud = getSerializer().decode(response.getEntity().getContent(), MetamodelResponse.class);
 			DebugLogger.log(this, Level.LOW, "Got the response.");
 			
 			

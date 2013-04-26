@@ -9,7 +9,7 @@ import android.os.Parcelable.Creator;
 import com.externc.coexist.DebugLogger;
 import com.externc.coexist.DebugLogger.Level;
 import com.externc.coexist.services.CreateService;
-import com.externc.coexist.services.CrudService;
+import com.externc.coexist.services.MetamodelService;
 import com.externc.coexist.services.SchemaService;
 import com.externc.coexist.services.SyncService;
 
@@ -48,7 +48,7 @@ public class API{
 	}
 	
 	public void crud(Context context){
-		Intent intent = new Intent(context, CrudService.class);
+		Intent intent = new Intent(context, MetamodelService.class);
 		context.startService(intent);
 	}
 

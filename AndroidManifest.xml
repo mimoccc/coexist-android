@@ -42,7 +42,7 @@
         </service>
         
         <service
-            android:name="com.externc.coexist.services.CrudService"
+            android:name="com.externc.coexist.services.MetamodelService"
             android:description="@string/service_crud"
             android:permission="android.permission.INTERNET"
             android:stopWithTask="false" >
