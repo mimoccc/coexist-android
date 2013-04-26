@@ -26,7 +26,7 @@ public class FormsAdapter extends BaseAdapter implements OnItemClickListener {
 	public FormsAdapter(Context context) throws FileNotFoundException, IOException {
 		DebugLogger.log(this, Level.LOW, "Creating a FormAdapter and getting Create from file system.");
 		this.context = context;
-		create = new Config(context).getCreate();
+		create = new Config(context).getMetamodel();
 	}
 
 	public int getCount() {

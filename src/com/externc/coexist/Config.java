@@ -42,7 +42,7 @@ public class Config{
 		getPrefs().edit().putInt("version", version).commit();
 	}
 	
-	public Metamodel getCreate() throws FileNotFoundException, IOException{
+	public Metamodel getMetamodel() throws FileNotFoundException, IOException{
 		DebugLogger.log(this, Level.LOW, "Retreiving the Create object from the file system.");
 		FileInputStream fis = getContext().openFileInput(createFile);
 		Serializer s = new Serializer();
@@ -51,7 +51,7 @@ public class Config{
 		return create;
 	}
 	
-	public void setCreate(Metamodel create) throws FileNotFoundException, IOException   {
+	public void setMetamodel(Metamodel create) throws FileNotFoundException, IOException   {
 		DebugLogger.log(this, Level.LOW, "Saving "+create+" as the new Create.");
 		FileOutputStream fos = getContext().openFileOutput(createFile, Context.MODE_PRIVATE);
 		fos.write(create.getBytes());
