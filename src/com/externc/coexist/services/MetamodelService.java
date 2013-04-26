@@ -43,7 +43,7 @@ public class MetamodelService extends BaseService {
 			DebugLogger.log(this, Level.LOW, "Got the response.");
 			
 			
-			Metamodel create = crud.getCreate();
+			Metamodel create = crud.getMetamodel();
 			config.setCreate(create);
 			
 			

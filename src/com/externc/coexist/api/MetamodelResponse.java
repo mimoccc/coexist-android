@@ -10,7 +10,7 @@ public class MetamodelResponse extends Response {
 
 	}
 	
-	public Metamodel getCreate(){
+	public Metamodel getMetamodel(){
 		return this.create;
 	}
 	
