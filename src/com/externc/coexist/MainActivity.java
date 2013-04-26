@@ -70,7 +70,7 @@ public class MainActivity extends BaseActivity{
 	
     public void crud(){
     	DebugLogger.log(this, Level.LOW, "Starting the crud service.");
-    	new API().crud(this);
+    	new API().metamodel(this);
     }
     
     

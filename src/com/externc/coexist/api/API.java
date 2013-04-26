@@ -47,7 +47,7 @@ public class API{
 		context.startService(intent);
 	}
 	
-	public void crud(Context context){
+	public void metamodel(Context context){
 		Intent intent = new Intent(context, MetamodelService.class);
 		context.startService(intent);
 	}

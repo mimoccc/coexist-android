@@ -85,7 +85,7 @@ public class SchemaService extends BaseService {
 
 			DebugLogger.log(this,Level.LOW,"Finished the schema udpate, starting sync.");
 			
-			getAPI().crud(this);
+			getAPI().metamodel(this);
 
 		} catch (IOException e) {
 			DebugLogger.log(this,Level.LOW,"Encountered a network error, printing stacktrace.");
