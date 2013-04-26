@@ -48,7 +48,8 @@ public class MainActivity extends BaseActivity{
     		sync();
     		return true;
     	case R.id.menu_resync:
-    		schema();
+//    		schema();
+    		metamodel();
     		return true;
     	default:
     		return super.onOptionsItemSelected(item);
@@ -68,7 +69,7 @@ public class MainActivity extends BaseActivity{
     	new API().schema(this);
     }
 	
-    public void crud(){
+    public void metamodel(){
     	DebugLogger.log(this, Level.LOW, "Starting the crud service.");
     	new API().metamodel(this);
     }

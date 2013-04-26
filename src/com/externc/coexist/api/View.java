@@ -3,19 +3,19 @@ package com.externc.coexist.api;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class View implements Parcelable{
+public class View extends Form implements Parcelable{
 
-	private String label;
-	private String table;
+//	private String label;
+//	private String table;
 	private String sql;
 	
-	public View() {
-		
+	private View() {
+		super();
 	}
 
 	private View(Parcel in){
-		this.label = in.readString();
-		this.table = in.readString();
+		setLabel(in.readString());
+		setTable(in.readString());
 		this.sql = in.readString();
 	}
 	
@@ -26,8 +26,8 @@ public class View implements Parcelable{
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(label);
-		dest.writeString(table);
+		dest.writeString(getLabel());
+		dest.writeString(getTable());
 		dest.writeString(sql);
 	}
 	
@@ -40,5 +40,16 @@ public class View implements Parcelable{
 			return new View[size];
 		}
 	};
+
+	@Override
+	public int size() {
+		return 0;
+	};
+
+	public String getSql() {
+		return sql;
+	}
+	
+	
 
 }

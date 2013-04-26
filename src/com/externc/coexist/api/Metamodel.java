@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.externc.coexist.DebugLogger;
+import com.externc.coexist.DebugLogger.Level;
+
 
 
 public class Metamodel implements Iterable<Form>, Writable{
@@ -26,8 +29,13 @@ public class Metamodel implements Iterable<Form>, Writable{
 	public List<Form> getForms(){
 		return this.forms;
 	}
+	
+	public List<View> getViews(){
+		return this.views;
+	}
 
 	public byte[] getBytes() {
+		DebugLogger.log(this, Level.LOW, "Saving metamodel with "+forms.size()+" forms and "+views.size()+" views");
 		Serializer s = new Serializer();
 		return s.encode(this).getBytes();
 	}

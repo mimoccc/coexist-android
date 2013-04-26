@@ -40,14 +40,14 @@ public class MetamodelService extends BaseService {
 			HttpResponse response = execute(getUrl());
 			DebugLogger.log(this, Level.LOW, "Sending request to: "+getUrl());
 			MetamodelResponse crud = getSerializer().decode(response.getEntity().getContent(), MetamodelResponse.class);
-			DebugLogger.log(this, Level.LOW, "Got the response.");
+			DebugLogger.log(this, Level.LOW, "Got the response. Views: "+crud.getMetamodel().getViews().size());
 			
 			
 			Metamodel metamodel = crud.getMetamodel();
 			config.setMetamodel(metamodel);
 			
-			
-			getAPI().sync(this);
+			getAPI().schema(this);
+//			getAPI().sync(this);
 		}catch(Exception e){
 			DebugLogger.log(this, Level.LOW, "Error: "+ e.toString());
 			e.printStackTrace();

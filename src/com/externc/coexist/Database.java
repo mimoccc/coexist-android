@@ -14,9 +14,11 @@ import android.database.sqlite.SQLiteException;
 import com.externc.coexist.DebugLogger.Level;
 import com.externc.coexist.api.Field;
 import com.externc.coexist.api.Form;
+import com.externc.coexist.api.Metamodel;
 import com.externc.coexist.api.Row;
 import com.externc.coexist.api.Schema;
 import com.externc.coexist.api.Sync;
+import com.externc.coexist.api.View;
 
 /**
  * This class will be used to interface with the database. Only read operations will
@@ -81,7 +83,7 @@ public class Database {
 	 * retrieved from the back end server, this function will execute the
 	 * sql within it to create the database and all of the tables.
 	 */
-	public void create(Schema schema) throws SQLiteException{
+	public void create(Schema schema, Metamodel model) throws SQLiteException{
 		DebugLogger.log(this, Level.LOW, "Starting to create the database.");
 		erase();
 		
@@ -98,6 +100,12 @@ public class Database {
 			db.execSQL("CREATE TABLE Recents( " +
 					"form VARCHAR(30) PRIMARY KEY," +
 					"recents VARCHAR(255))");
+			
+			DebugLogger.log(this, Level.LOW, model==null?"null":"not null");
+			for(View view : model.getViews()){
+				String sql = "CREATE VIEW "+view.getTable()+" AS "+view.getSql();
+				db.execSQL(sql);
+			}
 			
 			db.setTransactionSuccessful();
 			db.endTransaction();
@@ -252,17 +260,18 @@ public class Database {
 	 * and Recent values tables. This is displayed on the home page.
 	 * @return A list of table names that represent forms in the database.
 	 */
-	public List<String> getTables() {
+	public List<String> getTables(boolean includeViews) {
 		DebugLogger.log(this, Level.LOW, "Getting all of the tables.");
 		SQLiteDatabase db = open();
 		
 		List<String> tables = new ArrayList<String>();
-		Cursor c = db.rawQuery("select name " +
+		String sql = "select name " +
 				"from sqlite_master " +
-				"where type='table' and name not like 'android%' " +
+				"where "+ (includeViews ? "" : "type='table' and") +" name not like 'android%' " +
 				"and name not like 'sqlite%' and name <> 'Recents'" +
-				"order by name",null);
-		
+				"order by name";
+		Cursor c = db.rawQuery(sql,null);
+		DebugLogger.log(this, Level.LOW, "using "+sql);
 		while(c.moveToNext()){
 			tables.add(c.getString(0));
 		}

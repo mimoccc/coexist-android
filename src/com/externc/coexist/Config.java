@@ -46,9 +46,9 @@ public class Config{
 		DebugLogger.log(this, Level.LOW, "Retreiving the Create object from the file system.");
 		FileInputStream fis = getContext().openFileInput(createFile);
 		Serializer s = new Serializer();
-		Metamodel create = s.decode(fis, Metamodel.class);
-		
-		return create;
+		Metamodel metamodel = s.decode(fis, Metamodel.class);
+//		DebugLogger.log(this, Level.LOW, "Size of metamodel views: "+metamodel.getViews().size());
+		return metamodel;
 	}
 	
 	public void setMetamodel(Metamodel create) throws FileNotFoundException, IOException   {

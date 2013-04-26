@@ -2,6 +2,8 @@ package com.externc.coexist.ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,26 +17,30 @@ import android.widget.TextView;
 import com.externc.coexist.Config;
 import com.externc.coexist.DebugLogger;
 import com.externc.coexist.DebugLogger.Level;
-import com.externc.coexist.api.Metamodel;
 import com.externc.coexist.api.Form;
+import com.externc.coexist.api.Metamodel;
 
 public class FormsAdapter extends BaseAdapter implements OnItemClickListener {
 
 	private Metamodel create;
 	private Context context;
+	private List<Form> forms;
 	
 	public FormsAdapter(Context context) throws FileNotFoundException, IOException {
 		DebugLogger.log(this, Level.LOW, "Creating a FormAdapter and getting Create from file system.");
 		this.context = context;
 		create = new Config(context).getMetamodel();
+		forms = new ArrayList<Form>();
+		forms.addAll(create.getForms());
+		forms.addAll(create.getViews());
 	}
 
 	public int getCount() {
-		return create.getForms().size();
+		return forms.size();
 	}
 
 	public Object getItem(int position) {
-		return create.getForms().get(position);
+		return forms.get(position);
 	}
 
 	public long getItemId(int position) {

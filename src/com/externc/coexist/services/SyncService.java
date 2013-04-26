@@ -48,7 +48,7 @@ public class SyncService extends BaseService{
 		
 		Config conf = new Config(this);
 		Database db = Database.getDatabase(this);
-		List<String> tables = db.getTables();
+		List<String> tables = db.getTables(false);
 		
 		addParameter("version", conf.getVersion());
 		addParameter("tables", tables);
@@ -67,7 +67,7 @@ public class SyncService extends BaseService{
 			if(sync.getStatus() != 200){
 				DebugLogger.log(this, Level.HIGH, sync.getStatus() +": "+ sync.getMessage());
 				DebugLogger.log(this, Level.LOW, "Tried to sync, but an update is required.");
-				getAPI().schema(this);
+				getAPI().metamodel(this);
 			}else{
 				DebugLogger.log(this, Level.LOW, "Got the sync, passing it to the database.");
 				db.sync(sync);

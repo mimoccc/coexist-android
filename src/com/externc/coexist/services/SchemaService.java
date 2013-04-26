@@ -1,11 +1,13 @@
 package com.externc.coexist.services;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.http.HttpResponse;
 
 import android.content.Intent;
 
+import com.externc.coexist.Config;
 import com.externc.coexist.Database;
 import com.externc.coexist.DebugLogger;
 import com.externc.coexist.DebugLogger.Level;
@@ -51,10 +53,11 @@ public class SchemaService extends BaseService {
 	 * @param schema The Schema object that was returned as JSON from the 
 	 * server.
 	 */
-	private void createDatabase(Schema schema){
+	private void createDatabase(Schema schema) throws IOException, FileNotFoundException{
 		DebugLogger.log(this,Level.LOW,"Creating the database.");
 		Database db = Database.getDatabase(this);
-		db.create(schema);
+		Config config = new Config(this);
+		db.create(schema, config.getMetamodel());
 	}
 
 	/**
@@ -85,7 +88,8 @@ public class SchemaService extends BaseService {
 
 			DebugLogger.log(this,Level.LOW,"Finished the schema udpate, starting sync.");
 			
-			getAPI().metamodel(this);
+//			getAPI().metamodel(this);
+			getAPI().sync(this);
 
 		} catch (IOException e) {
 			DebugLogger.log(this,Level.LOW,"Encountered a network error, printing stacktrace.");

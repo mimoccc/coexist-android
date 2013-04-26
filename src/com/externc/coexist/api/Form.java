@@ -41,7 +41,7 @@ public class Form implements Parcelable, Iterable<Field>{
     
 
 	
-	private Form() {
+	protected Form() {
 	}
 
 	public String getLabel() {
@@ -65,6 +65,7 @@ public class Form implements Parcelable, Iterable<Field>{
 	}
 
 	public String getFieldsAsSql(){
+		
 		Iterator<Field> iter = fields.iterator();
 		
 		StringBuilder sb = new StringBuilder(iter.next().getColumn());
