@@ -65,6 +65,8 @@ public class Form implements Parcelable, Iterable<Field>{
 	}
 
 	public String getFieldsAsSql(){
+		if(fields.size() == 0)
+			return "*";
 		
 		Iterator<Field> iter = fields.iterator();
 		

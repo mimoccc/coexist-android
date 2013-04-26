@@ -331,6 +331,11 @@ public class Database {
 	public JointCursor getTableRows(Form form){
 		String table = form.getTable();
 		String sql = "SELECT "+form.getFieldsAsSql()+" FROM "+table;
+		//Right now, views have a field size of 0. Probably changing in
+		//the future
+		if(form.getFields().size() > 0){
+			sql += " order by mod_ts DESC";
+		}
 		DebugLogger.log(this, Level.LOW, "Getting rows for "+sql);
 		SQLiteDatabase db = open();
 		
